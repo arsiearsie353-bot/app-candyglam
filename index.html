@@ -1,0 +1,664 @@
+index.html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CandyGlam Marketplace</title>
+    <style>
+        /* Variabel Tema Warna Putih dan Cokelat Tua */
+        :root {
+            --primary-brown: #4A2C11;      /* Cokelat Tua Utama */
+            --dark-brown: #2D1A0A;         /* Cokelat Gelap untuk Tombol */
+            --light-cream: #FAF6F2;        /* Krem/Putih Tulang Lembut */
+            --white: #FFFFFF;              /* Putih Bersih */
+            --border-color: #E6DDD5;
+            --text-main: #333333;
+            --text-muted: #777777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #FCFBF9;
+            color: var(--text-main);
+        }
+
+        /* --- HEADER NAVBAR --- */
+        .main-header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+            background-color: var(--primary-brown);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            color: var(--primary-brown);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .search-wrapper {
+            flex: 1;
+            margin: 0 40px;
+            position: relative;
+            max-width: 650px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 11px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--light-cream);
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            background-color: var(--primary-brown);
+            color: var(--white);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .search-btn:hover {
+            background-color: var(--dark-brown);
+        }
+
+        .user-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* --- LAYOUT UTAMA KANVAS LAPTOP --- */
+        .desktop-layout {
+            max-width: 1400px;
+            margin: 25px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 240px 1fr 340px;
+            gap: 20px;
+        }
+
+        /* --- SIDEBAR KIRI: KATEGORI & FILTER --- */
+        .left-sidebar {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            align-self: start;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: var(--primary-brown);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--light-cream);
+            padding-bottom: 8px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 13px;
+            color: var(--text-main);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .category-link:hover {
+            color: var(--primary-brown);
+            font-weight: bold;
+        }
+
+        /* --- KONTEN TENGAH: BANNER & DAFTAR BAJU --- */
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .glam-banner {
+            background-color: var(--light-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            background-image: linear-gradient(to right, #FAF6F2, #FFFFFF);
+        }
+
+        .glam-banner h2 {
+            color: var(--primary-brown);
+            font-size: 26px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .glam-banner p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-brown);
+            box-shadow: 0 6px 15px rgba(74, 44, 17, 0.06);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #FCFAF7, #F5EFEB);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .dress-silhouette {
+            width: 80px;
+            height: 130px;
+            background-color: var(--cloth-color, var(--primary-brown));
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .dress-silhouette::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -15px;
+            width: 15px;
+            height: 50px;
+            background-color: var(--cloth-color, var(--primary-brown));
+            border-radius: 8px 0 0 4px;
+        }
+
+        .dress-silhouette::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -15px;
+            width: 15px;
+            height: 50px;
+            background-color: var(--cloth-color, var(--primary-brown));
+            border-radius: 0 8px 4px 0;
+        }
+
+        .card-details {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .item-description {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 16px;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .item-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-brown);
+        }
+
+        .btn-buy {
+            background-color: var(--white);
+            color: var(--primary-brown);
+            border: 1px solid var(--primary-brown);
+            padding: 7px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-buy:hover {
+            background-color: var(--primary-brown);
+            color: var(--white);
+        }
+
+        /* --- SIDEBAR KANAN: PANEL CHECKOUT & DELIVERY --- */
+        .right-sidebar {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            align-self: start;
+            position: sticky;
+            top: 90px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .checkout-items-list {
+            margin-bottom: 15px;
+            min-height: 60px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .checkout-row-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-main);
+            padding: 8px 0;
+            border-bottom: 1px dashed #EAEAEA;
+        }
+
+        .shipping-box {
+            background-color: var(--light-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .shipping-header {
+            font-weight: bold;
+            color: var(--primary-brown);
+            margin-bottom: 8px;
+        }
+
+        .shipping-option {
+            display: block;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        .final-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 15px 0;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .final-price {
+            color: var(--primary-brown);
+            font-size: 19px;
+        }
+
+        .btn-submit-order {
+            width: 100%;
+            background-color: var(--primary-brown);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-order:hover {
+            background-color: var(--dark-brown);
+        }
+
+        /* --- POPUP NOTIFIKASI SUKSES --- */
+        .overlay-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .overlay-popup.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            border: 2px solid var(--primary-brown);
+        }
+
+        .popup-icon {
+            font-size: 40px;
+        }
+
+        .popup-card h4 {
+            color: var(--primary-brown);
+            font-size: 18px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        .popup-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .btn-done {
+            background: var(--primary-brown);
+            color: var(--white);
+            border: none;
+            padding: 9px 25px;
+            margin-top: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER NAVBAR -->
+    <header class="main-header">
+        <div class="logo-area">
+            <span class="logo-icon">CG</span>
+            <a href="#" class="logo-text">CandyGlam</a>
+        </div>
+        <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="Cari gamis, tunik, atau daster premium...">
+            <button class="search-btn">Cari</button>
+        </div>
+        <div class="user-nav">
+            <span>🛒 Keranjang (<span id="cartCounter">0</span>)</span>
+            <span>|</span>
+            <span>Cece 👑</span>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="desktop-layout">
+        
+        <!-- SIDEBAR KIRI -->
+        <aside class="left-sidebar">
+            <div class="sidebar-title">Kategori</div>
+            <ul class="category-list">
+                <li><a href="#" class="category-link">👗 Dresses &amp; Gamis</a></li>
+                <li><a href="#" class="category-link">👚 Tops / Atasan</a></li>
+                <li><a href="#" class="category-link">👖 Celana Sepedaan</a></li>
+                <li><a href="#" class="category-link">👘 Daster Setelan</a></li>
+                <li><a href="#" class="category-link">✨ Produk Baru</a></li>
+            </ul>
+        </aside>
+
+        <!-- ETALASE PRODUK TENGAH -->
+        <section class="center-content">
+            <div class="glam-banner">
+                <h2>Glamour Sehari-hari</h2>
+                <p>Koleksi pakaian muslimah &amp; kasual ternyaman dengan pilihan warna estetik.</p>
+            </div>
+
+            <div class="product-grid">
+                <!-- Produk 1 -->
+                <div class="product-card">
+                    <div class="image-container">
+                        <div class="dress-silhouette" style="--cloth-color: #8B2635;"></div>
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <div class="item-name">1. Red Floral / Batik Gamis Dress</div>
+                            <div class="item-description">Kain jersey premium super tebal, flowy, adem, busui friendly, dan sangat elegan.</div>
+                        </div>
+                        <div class="price-container">
+                            <span class="item-price">Rp 253.999</span>
+                            <button class="btn-buy" onclick="pilihBarang('Red Floral Gamis Dress', 253999)">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produk 2 -->
+                <div class="product-card">
+                    <div class="image-container">
+                        <div class="dress-silhouette" style="--cloth-color: #4A2C11;"></div>
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <div class="item-name">2. Cozy Brown Overalls Hoodie</div>
+                            <div class="item-description">Desain luar santai, hangat, dan modis dengan kombinasi warna cokelat tua yang manis.</div>
+                        </div>
+                        <div class="price-container">
+                            <span class="item-price">Rp 185.000</span>
+                            <button class="btn-buy" onclick="pilihBarang('Cozy Brown Overalls Hoodie', 185000)">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produk 3 -->
+                <div class="product-card">
+                    <div class="image-container">
+                        <div class="dress-silhouette" style="--cloth-color: #8C6D53;"></div>
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <div class="item-name">3. Daster Setelan Premium</div>
+                            <div class="item-description">Setelan baju tidur celana panjang berbahan rayon premium, nyaman untuk bergerak bebas.</div>
+                        </div>
+                        <div class="price-container">
+                            <span class="item-price">Rp 125.000</span>
+                            <button class="btn-buy" onclick="pilihBarang('Daster Setelan Premium', 125000)">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produk 4 -->
+                <div class="product-card">
+                    <div class="image-container">
+                        <div class="dress-silhouette" style="--cloth-color: #C4A484;"></div>
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <div class="item-name">4. Cute Cat Blouse Tunik</div>
+                            <div class="item-description">Kombinasi corak putih-cokelat lembut dengan pita manis, cocok untuk jalan santai.</div>
+                        </div>
+                        <div class="price-container">
+                            <span class="item-price">Rp 145.000</span>
+                            <button class="btn-buy" onclick="pilihBarang('Cute Cat Blouse Tunik', 145000)">Beli Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIDEBAR KANAN (CHECKOUT) -->
+        <aside class="right-sidebar">
+            <div class="sidebar-subtitle">Ringkasan Belanja</div>
+            <div class="checkout-items-list" id="checkoutContainer">
+                Belum ada barang. Klik "Beli Sekarang".
+            </div>
+
+            <div class="shipping-box">
+                <div class="shipping-header">Deliveri (Opsi Pengiriman)</div>
+                <label class="shipping-option">
+                    <input type="radio" name="ongkir" value="0" checked onchange="hitungUlangTotal()"> J&amp;T Reguler (Gratis Ongkir)
+                </label>
+                <label class="shipping-option">
+                    <input type="radio" name="ongkir" value="10000" onchange="hitungUlangTotal()"> JNE Express (+Rp 10.000)
+                </label>
+            </div>
+
+            <div class="final-total-row">
+                <span>Total:</span>
+                <span class="final-price" id="totalDisplay">Rp 0</span>
+            </div>
+
+            <button class="btn-submit-order" onclick="kirimPesananAkhir()">Lanjutkan ke Pembayaran</button>
+        </aside>
+
+    </main>
+
+    <!-- POPUP NOTIFIKASI SUKSES -->
+    <div class="overlay-popup" id="popupSukses">
+        <div class="popup-card">
+            <div class="popup-icon">🎉</div>
+            <h4>Pesanan Berhasil Dibuat!</h4>
+            <p>Transaksi belanja simulasi e-commerce CandyGlam Anda sukses tersimpan di server lokal komputer Anda.</p>
+            <button class="btn-done" onclick="selesaiBelanja()">Selesai</button>
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT -->
+    <script>
+        let akumulasiHarga = 0;
+        let totalBarang = 0;
+
+        const container = document.getElementById('checkoutContainer');
+        const displayTotal = document.getElementById('totalDisplay');
+        const counterAtas = document.getElementById('cartCounter');
+
+        function uangRupiah(angka) {
+            return 'Rp ' + angka.toLocaleString('id-ID');
+        }
+
+        function ambilOngkir() {
+            const radioTerpilih = document.querySelector('input[name="ongkir"]:checked');
+            return radioTerpilih ? parseInt(radioTerpilih.value, 10) : 0;
+        }
+
+        function hitungUlangTotal() {
+            if (totalBarang === 0) {
+                displayTotal.innerText = 'Rp 0';
+                return;
+            }
+            const totalAkhir = akumulasiHarga + ambilOngkir();
+            displayTotal.innerText = uangRupiah(totalAkhir);
+        }
+
+        function pilihBarang(namaBarang, hargaBarang) {
+            if (totalBarang === 0) {
+                container.innerHTML = '';
+            }
+            totalBarang++;
+            akumulasiHarga += hargaBarang;
+
+            const barisBaru = document.createElement('div');
+            barisBaru.className = 'checkout-row-item';
+            barisBaru.innerHTML = '<span>' + totalBarang + '. ' + namaBarang + ' (1x)</span><span>' + uangRupiah(hargaBarang) + '</span>';
+            container.appendChild(barisBaru);
+
+            hitungUlangTotal();
+            counterAtas.innerText = totalBarang;
+        }
+
+        function kirimPesananAkhir() {
+            if (totalBarang === 0) {
+                alert("Pilih minimal satu pakaian dengan menekan tombol 'Beli Sekarang'!");
+                return;
+            }
+            document.getElementById('popupSukses').classList.add('active');
+        }
+
+        function selesaiBelanja() {
+            document.getElementById('popupSukses').classList.remove('active');
+            container.innerHTML = 'Belum ada barang. Klik "Beli Sekarang".';
+            akumulasiHarga = 0;
+            totalBarang = 0;
+            displayTotal.innerText = 'Rp 0';
+            counterAtas.innerText = '0';
+        }
+    </script>
+</body>
+</html>
